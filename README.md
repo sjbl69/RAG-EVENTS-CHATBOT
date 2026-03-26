@@ -15,31 +15,38 @@ Les données utilisées proviendront de l’API OpenAgenda.
 
 ## 📁 Structure du projet
 
-Le projet est organisé de la manière suivante :
+Le projet est actuellement organisé comme suit :
 
 ```
 rag-events-chatbot/
 
-├── app/                # (prévu) API FastAPI
+├── app/                # (prévu) API REST avec FastAPI
 ├── data/               # (prévu) données d’événements
-├── scripts/            # (prévu) scripts de traitement
-├── notebooks/          # (prévu) exploration / tests
+├── scripts/            # (prévu) scripts de traitement (ingestion, nettoyage, indexation)
+├── notebooks/          # (prévu) exploration et tests
 ├── tests/              # (prévu) tests unitaires
 
-├── env/                # environnement virtuel principal (local)
-├── test_env/           # environnement de test (non utilisé en production)
+├── env/                # environnement virtuel local principal (non versionné)
+├── test_env/           # environnement de test pour vérifier la reproductibilité
 
-├── test_imports.py     # script de vérification des dépendances
-├── requirements.txt    # liste des dépendances
-├── README.md           # documentation du projet
+├── test_imports.py     # script de validation des dépendances
+├── requirements.txt    # liste des dépendances du projet
+├── README.md           # documentation
 ├── .gitignore
 ```
 
 ### Remarques importantes
 
 * Les dossiers `app`, `data`, `scripts`, `tests` et `notebooks` sont **présents mais encore vides** à ce stade.
-* Ils correspondent à la **structure cible du projet**, qui sera remplie dans les prochaines étapes (pipeline RAG, API, etc.).
-* Les dossiers `env/` et `test_env/` sont des environnements virtuels locaux et **ne doivent pas être versionnés**.
+* Ils correspondent à la **structure cible du projet**, qui sera progressivement remplie dans les prochaines étapes (pipeline RAG, API, etc.).
+* Les dossiers `env/` et `test_env/` sont des environnements virtuels locaux utilisés uniquement pour le développement et les tests. Ils ne doivent pas être versionnés.
+* La reproductibilité de l’environnement a été validée en recréant un environnement vierge (`test_env`) et en exécutant :
+
+  ```
+  pip install -r requirements.txt
+  ```
+
+  sans erreur de dépendances.
 
 ---
 
