@@ -1,9 +1,13 @@
+import sys
+
 def test_faiss():
     try:
         import faiss
         print(" FAISS importé avec succès")
     except Exception as e:
         print(f" Erreur FAISS : {e}")
+        return False
+    return True
 
 
 def test_langchain():
@@ -13,6 +17,8 @@ def test_langchain():
         print(" LangChain importé avec succès")
     except Exception as e:
         print(f" Erreur LangChain : {e}")
+        return False
+    return True
 
 
 def test_mistral():
@@ -21,6 +27,8 @@ def test_mistral():
         print(" Mistral importé avec succès")
     except Exception as e:
         print(f" Erreur Mistral : {e}")
+        return False
+    return True
 
 
 def test_transformers():
@@ -29,6 +37,8 @@ def test_transformers():
         print(" Sentence-Transformers importé avec succès")
     except Exception as e:
         print(f" Erreur Transformers : {e}")
+        return False
+    return True
 
 
 def test_fastapi():
@@ -37,15 +47,22 @@ def test_fastapi():
         print(" FastAPI importé avec succès")
     except Exception as e:
         print(f" Erreur FastAPI : {e}")
+        return False
+    return True
 
 
 if __name__ == "__main__":
     print(" Test des imports du projet RAG\n")
 
-    test_faiss()
-    test_langchain()
-    test_mistral()
-    test_transformers()
-    test_fastapi()
+    results = [
+        test_faiss(),
+        test_langchain(),
+        test_mistral(),
+        test_transformers(),
+        test_fastapi()
+    ]
 
     print("\n Test terminé")
+
+    if not all(results):
+        sys.exit(1)
