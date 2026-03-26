@@ -18,27 +18,27 @@ def test_fastapi():
 
 
 if __name__ == "__main__":
-    print("🚀 Test des imports du projet RAG\n")
+    print(" Test des imports du projet RAG\n")
 
     try:
         test_faiss()
-        print("✅ FAISS OK")
+        print(" FAISS OK")
 
         test_langchain()
-        print("✅ LangChain OK")
+        print(" LangChain OK")
 
         test_mistral()
-        print("✅ Mistral OK")
+        print(" Mistral OK")
 
         test_transformers()
-        print("✅ Sentence-Transformers OK")
+        print(" Sentence-Transformers OK")
 
         test_fastapi()
-        print("✅ FastAPI OK")
+        print(" FastAPI OK")
 
-        print("\n🎯 Tous les imports sont fonctionnels")
+        print("\n Tous les imports sont fonctionnels")
         sys.exit(0)
 
     except Exception as e:
-        print(f"\n❌ ERREUR : {e}")
+        print(f"\n ERREUR : {e}")
         sys.exit(1)
