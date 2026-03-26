@@ -15,20 +15,31 @@ Les données utilisées proviendront de l’API OpenAgenda.
 
 ## 📁 Structure du projet
 
+Le projet est organisé de la manière suivante :
+
+```
 rag-events-chatbot/
 
-app/         # API REST 
-data/        # données brutes et nettoyées
-scripts/     # ingestion, nettoyage, indexation
-tests/       # tests unitaires
-notebooks/   # exploration 
+├── app/                # (prévu) API FastAPI
+├── data/               # (prévu) données d’événements
+├── scripts/            # (prévu) scripts de traitement
+├── notebooks/          # (prévu) exploration / tests
+├── tests/              # (prévu) tests unitaires
 
-Fichiers principaux :
-test_imports.py
-requirements.txt
-.env
-.gitignore
-README.md
+├── env/                # environnement virtuel principal (local)
+├── test_env/           # environnement de test (non utilisé en production)
+
+├── test_imports.py     # script de vérification des dépendances
+├── requirements.txt    # liste des dépendances
+├── README.md           # documentation du projet
+├── .gitignore
+```
+
+### Remarques importantes
+
+* Les dossiers `app`, `data`, `scripts`, `tests` et `notebooks` sont **présents mais encore vides** à ce stade.
+* Ils correspondent à la **structure cible du projet**, qui sera remplie dans les prochaines étapes (pipeline RAG, API, etc.).
+* Les dossiers `env/` et `test_env/` sont des environnements virtuels locaux et **ne doivent pas être versionnés**.
 
 ---
 
