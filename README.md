@@ -11,53 +11,51 @@ Le système reposera sur une architecture RAG (Retrieval-Augmented Generation) c
 
 Les données utilisées proviendront de l’API OpenAgenda.
 
-
-
 ---
 
-##  Structure du projet
+## 📁 Structure du projet
 
 rag-events-chatbot/
 
-- app/ → API REST (FastAPI)
-- data/ → données brutes et nettoyées
-- scripts/ → ingestion, nettoyage, indexation
-- tests/ → tests unitaires
-- notebooks/ → exploration (optionnel)
+app/         # API REST 
+data/        # données brutes et nettoyées
+scripts/     # ingestion, nettoyage, indexation
+tests/       # tests unitaires
+notebooks/   # exploration 
 
 Fichiers principaux :
-- test_imports.py → vérification de l’environnement
-- requirements.txt → dépendances
-- .env → variables d’environnement (non versionné)
-- .gitignore
-- README.md
+test_imports.py
+requirements.txt
+.env
+.gitignore
+README.md
 
 ---
 
 ##  Installation complète (reproductible)
 
-### 1. Cloner le dépôt
+1. Cloner le dépôt
 
 git clone https://github.com/sjbl69/RAG-EVENTS-CHATBOT.git  
 cd RAG-EVENTS-CHATBOT  
 
 ---
 
-### 2. Vérifier la version de Python
+2. Vérifier la version de Python
 
 python --version  
 
- Version requise : Python 3.8 ou supérieur (recommandé : Python 3.12)
+Version requise : Python 3.8 ou supérieur (recommandé : Python 3.12)
 
 ---
 
-### 3. Créer un environnement virtuel
+3. Créer un environnement virtuel
 
 python -m venv env  
 
 ---
 
-### 4. Activer l’environnement
+4. Activer l’environnement
 
 Windows (PowerShell / CMD) :  
 env\Scripts\activate  
@@ -65,24 +63,24 @@ env\Scripts\activate
 Mac / Linux :  
 source env/bin/activate  
 
- Vous devez voir `(env)` apparaître dans le terminal
+Vous devez voir (env) apparaître dans le terminal
 
 ---
 
-### 5. Installer les dépendances
+5. Installer les dépendances
 
 pip install --upgrade pip  
 pip install -r requirements.txt  
 
 ---
 
-## Configuration
+##  Configuration
 
-Créer un fichier `.env` à la racine du projet :
+Créer un fichier .env à la racine du projet :
 
 MISTRAL_API_KEY=your_api_key_here  
 
- Ne jamais versionner ce fichier.
+Ne jamais versionner ce fichier.
 
 ---
 
@@ -92,18 +90,19 @@ Lancer le script :
 
 python test_imports.py  
 
-Ce script vérifie que toutes les dépendances essentielles sont correctement installées.  
-Il retourne un code de sortie :
-- 0 → succès  
-- 1 → échec  
+Ce script vérifie que toutes les dépendances essentielles sont correctement installées.
+
+Code de sortie :
+0 → succès  
+1 → échec  
 
 Résultat attendu :
 
- FAISS OK  
- LangChain OK  
- Mistral OK  
- Sentence-Transformers OK  
- FastAPI OK  
+FAISS OK  
+LangChain OK  
+Mistral OK  
+Sentence-Transformers OK  
+FastAPI OK  
 
 ---
 
@@ -142,7 +141,6 @@ Ils permettront de valider :
 - Sentence Transformers (HuggingFace)  
 - FastAPI  
 - Uvicorn  
-
 
 ---
 
