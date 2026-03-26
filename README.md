@@ -4,29 +4,18 @@
 
 Ce projet vise à développer un assistant intelligent capable de répondre aux questions des utilisateurs concernant des événements culturels à venir.
 
-Le système repose sur une architecture RAG (Retrieval-Augmented Generation) combinant :
+Le système reposera sur une architecture RAG (Retrieval-Augmented Generation) combinant :
 - une recherche sémantique via un index vectoriel (FAISS)
 - un modèle de génération de texte (Mistral)
 - une orchestration via LangChain
 
 Les données utilisées proviendront de l’API OpenAgenda.
 
----
 
-##  Architecture du système
-
-Le système est composé de plusieurs modules :
-
-- Ingestion des données : récupération des événements via API
-- Nettoyage et préparation : transformation des données textuelles
-- Vectorisation : conversion en embeddings avec HuggingFace
-- Stockage : index vectoriel FAISS
-- RAG Pipeline : recherche + génération de réponse
-- API REST : exposition du système avec FastAPI
 
 ---
 
-## 📁 Structure du projet
+##  Structure du projet
 
 rag-events-chatbot/
 
@@ -45,35 +34,55 @@ Fichiers principaux :
 
 ---
 
-##  Installation
+##  Installation complète (reproductible)
 
-### 1. Cloner le projet
+### 1. Cloner le dépôt
 
-git clone <url-du-repo>  
-cd rag-events-chatbot
+git clone https://github.com/sjbl69/RAG-EVENTS-CHATBOT.git  
+cd RAG-EVENTS-CHATBOT  
 
 ---
 
-### 2. Créer un environnement virtuel
+### 2. Vérifier la version de Python
+
+python --version  
+
+ Version requise : Python 3.8 ou supérieur (recommandé : Python 3.12)
+
+---
+
+### 3. Créer un environnement virtuel
 
 python -m venv env  
-env\Scripts\activate
 
 ---
 
-### 3. Installer les dépendances
+### 4. Activer l’environnement
 
-pip install -r requirements.txt
+Windows (PowerShell / CMD) :  
+env\Scripts\activate  
+
+Mac / Linux :  
+source env/bin/activate  
+
+ Vous devez voir `(env)` apparaître dans le terminal
 
 ---
 
-##  Configuration
+### 5. Installer les dépendances
+
+pip install --upgrade pip  
+pip install -r requirements.txt  
+
+---
+
+## Configuration
 
 Créer un fichier `.env` à la racine du projet :
 
-MISTRAL_API_KEY=your_api_key_here
+MISTRAL_API_KEY=your_api_key_here  
 
-⚠️ Ne jamais versionner ce fichier.
+ Ne jamais versionner ce fichier.
 
 ---
 
@@ -81,50 +90,58 @@ MISTRAL_API_KEY=your_api_key_here
 
 Lancer le script :
 
-python test_imports.py
+python test_imports.py  
+
+Ce script vérifie que toutes les dépendances essentielles sont correctement installées.  
+Il retourne un code de sortie :
+- 0 → succès  
+- 1 → échec  
 
 Résultat attendu :
 
- FAISS importé avec succès  
- LangChain importé avec succès  
- Mistral importé avec succès  
- Sentence-Transformers importé avec succès  
- FastAPI importé avec succès  
+ FAISS OK  
+ LangChain OK  
+ Mistral OK  
+ Sentence-Transformers OK  
+ FastAPI OK  
 
 ---
 
-##  Lancement du projet
+##  État actuel du projet
 
-Les prochaines étapes incluent :
-- récupération des données OpenAgenda
-- construction de l’index FAISS
-- mise en place de l’API FastAPI
+Ce dépôt correspond à la mise en place de l’environnement de développement reproductible.
+
+Les fonctionnalités suivantes ne sont pas encore implémentées :
+- récupération des données OpenAgenda  
+- construction de l’index FAISS  
+- pipeline RAG complet  
+- API FastAPI  
 
 ---
 
 ##  Tests
 
-Les tests unitaires seront disponibles dans le dossier :
+Les tests unitaires seront ajoutés dans le dossier :
 
 tests/
 
 Ils permettront de valider :
-- la récupération des données
-- la vectorisation
-- la génération de réponses
+- la récupération des données  
+- la vectorisation  
+- la génération de réponses  
 
 ---
 
 ##  Technologies utilisées
 
-- Python 3.12
-- LangChain
-- FAISS
-- Mistral AI
-- Sentence Transformers (HuggingFace)
-- FastAPI
-- Uvicorn
-
+- Python 3.12  
+- LangChain  
+- LangChain Community  
+- FAISS (faiss-cpu)  
+- Mistral AI  
+- Sentence Transformers (HuggingFace)  
+- FastAPI  
+- Uvicorn  
 
 
 ---
