@@ -14,7 +14,7 @@ MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
 if not MISTRAL_API_KEY:
     raise ValueError(" MISTRAL_API_KEY non définie")
 
-# embeddings (doit être IDENTIQUE à celui utilisé pour FAISS)
+# embeddings 
 embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
