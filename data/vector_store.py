@@ -30,7 +30,7 @@ def build_documents(events):
         chunks = splitter.split_text(text)
 
         for chunk in chunks:
-            # ✅ CORRECTION IMPORTANTE (alignement des données)
+            # alignement des données
             metadata = {
                 "title": event.get("title") or event.get("title_fr"),
                 "date": event.get("date"),
