@@ -4,9 +4,7 @@ from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
-
 # Embeddings
-
 def get_embeddings():
     return HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-MiniLM-L6-v2"
@@ -14,7 +12,6 @@ def get_embeddings():
 
 
 # Construction des documents + CHUNKING
-
 def build_documents(events):
     documents = []
 
@@ -24,7 +21,7 @@ def build_documents(events):
     )
 
     for event in events:
-        #  CORRECTION ICI (compatibilité test + pipeline réel)
+        # compatibilité pipeline réel + tests
         text = event.get("text") or event.get("description", "")
 
         if not text:
@@ -33,10 +30,11 @@ def build_documents(events):
         chunks = splitter.split_text(text)
 
         for chunk in chunks:
+            # ✅ CORRECTION IMPORTANTE (alignement des données)
             metadata = {
-                "title": event.get("title"),
+                "title": event.get("title") or event.get("title_fr"),
                 "date": event.get("date"),
-                "location": event.get("location"),
+                "location": event.get("location") or event.get("city"),
                 "url": event.get("url"),
             }
 
@@ -51,23 +49,18 @@ def build_documents(events):
 
 
 # Création index FAISS
-
-
 def create_faiss_index(documents):
     embeddings = get_embeddings()
     db = FAISS.from_documents(documents, embeddings)
     return db
 
 
-#  Sauvegarde index
-
+# Sauvegarde index
 def save_faiss(db, path="faiss_index"):
     db.save_local(path)
 
 
-
-#  Chargement index
-
+# Chargement index
 def load_faiss(path="faiss_index"):
     embeddings = get_embeddings()
     return FAISS.load_local(
@@ -77,9 +70,7 @@ def load_faiss(path="faiss_index"):
     )
 
 
-
-#  Recherche sémantique
-
+# Recherche sémantique
 def search(query, db, k=3):
     results = db.similarity_search(query, k=k)
     return results
