@@ -30,12 +30,14 @@ def build_documents(events):
         chunks = splitter.split_text(text)
 
         for chunk in chunks:
-            # alignement des données
+            # ✅ CORRECTION IMPORTANTE (robustesse metadata)
+            meta = event.get("metadata", {})
+
             metadata = {
-                "title": event.get("title") or event.get("title_fr"),
-                "date": event.get("date"),
-                "location": event.get("location") or event.get("city"),
-                "url": event.get("url"),
+                "title": event.get("title") or meta.get("title") or event.get("title_fr"),
+                "date": event.get("date") or meta.get("date"),
+                "location": event.get("location") or meta.get("location") or meta.get("city"),
+                "url": event.get("url") or meta.get("url"),
             }
 
             documents.append(
