@@ -20,13 +20,13 @@ Le projet est actuellement organisé comme suit :
 ```
 rag-events-chatbot/
 
-├── app/                # (prévu) API REST avec FastAPI
-├── data/               # (prévu) données d’événements
-├── scripts/            # (prévu) scripts de traitement (ingestion, nettoyage, indexation)
-├── notebooks/          # (prévu) exploration et tests
-├── tests/              # (prévu) tests unitaires
+├── app/                # API REST avec FastAPI
+├── data/               # données d’événements
+├── scripts/            # scripts de traitement (ingestion, nettoyage, indexation)
+├── notebooks/          # exploration et tests
+├── tests/              # tests unitaires
 
-├── env/                # environnement virtuel local principal (non versionné)
+├── env/                # environnement virtuel local principal 
 ├── test_env/           # environnement de test pour vérifier la reproductibilité
 
 ├── test_imports.py     # script de validation des dépendances
