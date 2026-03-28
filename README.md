@@ -13,12 +13,13 @@ Les données utilisées proviennent de l’API OpenAgenda.
 
 ---
 
-
 ## Structure du projet
 
+```
 rag-events-chatbot/
-
+│
 ├── app/
+│
 ├── data/
 │   ├── collect_events.py
 │   ├── vector_store.py
@@ -27,6 +28,7 @@ rag-events-chatbot/
 │   ├── build_vector_db.py
 │
 ├── notebooks/
+│
 ├── tests/
 │   ├── test_collect_events.py
 │   ├── test_faiss.py
@@ -36,42 +38,76 @@ rag-events-chatbot/
 │   ├── prompt.py
 │   ├── evaluate.py
 │
-├── faiss_index/        
+├── faiss_index/        (généré, non versionné)
+│
 ├── main.py
 ├── requirements.txt
 ├── test_imports.py
 ├── README.md
 ├── .gitignore
+```
 
 ---
 
 ## Installation complète (reproductible)
 
-Cloner le dépôt :
+### 1. Cloner le projet
+
+```bash
 git clone https://github.com/sjbl69/RAG-EVENTS-CHATBOT.git
 cd RAG-EVENTS-CHATBOT
+```
 
-Créer un environnement virtuel :
+---
+
+### 2. Vérifier Python
+
+```bash
+python --version
+```
+
+Recommandé : Python 3.10+
+
+---
+
+### 3. Créer un environnement virtuel
+
+```bash
 python -m venv env
+```
 
-Activer l’environnement :
+---
+
+### 4. Activer l’environnement
+
 Windows :
+```bash
 env\Scripts\activate
+```
 
 Mac / Linux :
+```bash
 source env/bin/activate
+```
 
-Installer les dépendances :
+---
+
+### 5. Installer les dépendances
+
+```bash
 pip install --upgrade pip
 pip install -r requirements.txt
+```
 
 ---
 
 ## Configuration
 
-Créer un fichier .env à la racine du projet :
+Créer un fichier `.env` à la racine du projet :
 
+```env
 MISTRAL_API_KEY=your_api_key_here
+```
 
 Ne jamais versionner ce fichier.
 
@@ -79,20 +115,23 @@ Ne jamais versionner ce fichier.
 
 ## Vérification de l’environnement
 
+```bash
 python test_imports.py
+```
 
 Résultat attendu :
-FAISS OK
-LangChain OK
-Mistral OK
-Sentence-Transformers OK
-FastAPI OK
+
+- FAISS OK  
+- LangChain OK  
+- Mistral OK  
+- Sentence-Transformers OK  
+- FastAPI OK  
 
 ---
 
 ## IMPORTANT — Index FAISS
 
-Le dossier faiss_index/ n’est pas versionné.
+Le dossier `faiss_index/` n’est pas versionné.
 
 Il doit être reconstruit avant d’utiliser le chatbot.
 
@@ -100,50 +139,68 @@ Il doit être reconstruit avant d’utiliser le chatbot.
 
 ## Workflow complet
 
-1. Collecte des événements :
+### 1. Collecte des événements
+
+```bash
 python data/collect_events.py
+```
 
-2. Nettoyage des données :
+---
+
+### 2. Nettoyage des données
+
+```bash
 python data/clean_events.py
+```
 
-3. Construction de l’index vectoriel (FAISS) :
+---
+
+### 3. Construction de l’index FAISS
+
+```bash
 python scripts/build_vector_db.py
+```
 
-→ crée le dossier faiss_index/
+ Cela crée le dossier `faiss_index/`
 
-4. Lancement du chatbot :
+---
+
+### 4. Lancer le chatbot
+
+```bash
 python main.py
+```
 
 ---
 
 ## Fonctionnement
 
-1. L’utilisateur pose une question
-2. FAISS récupère les événements pertinents
-3. Les résultats sont injectés dans un prompt
-4. Mistral génère une réponse naturelle et contextualisée
+1. L’utilisateur pose une question  
+2. FAISS récupère les événements pertinents  
+3. Les résultats sont injectés dans un prompt  
+4. Mistral génère une réponse naturelle  
 
 ---
 
 ## Exemple
 
-Question :
+**Question :**
 Quels événements à Paris ?
 
-Réponse :
+**Réponse :**
 Recommandations d’événements avec date et lieu
 
 ---
 
 ## Technologies utilisées
 
-Python 3.12
-LangChain
-FAISS (faiss-cpu)
-Mistral AI
-Sentence Transformers
-FastAPI
-Uvicorn
+- Python  
+- LangChain  
+- FAISS (faiss-cpu)  
+- Mistral AI  
+- Sentence Transformers  
+- FastAPI  
+- Uvicorn  
 
 ---
 
