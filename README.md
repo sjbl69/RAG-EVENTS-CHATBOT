@@ -1,167 +1,152 @@
-#  RAG Chatbot – Recommandation d’événements culturels
+# RAG Chatbot – Recommandation d’événements culturels
 
-##  Objectif du projet
+## Objectif du projet
 
 Ce projet vise à développer un assistant intelligent capable de répondre aux questions des utilisateurs concernant des événements culturels à venir.
 
-Le système reposera sur une architecture RAG (Retrieval-Augmented Generation) combinant :
+Le système repose sur une architecture RAG combinant :
 - une recherche sémantique via un index vectoriel (FAISS)
 - un modèle de génération de texte (Mistral)
 - une orchestration via LangChain
 
-Les données utilisées proviendront de l’API OpenAgenda.
+Les données utilisées proviennent de l’API OpenAgenda.
 
 ---
 
-## 📁 Structure du projet
 
-Le projet est actuellement organisé comme suit :
+## Structure du projet
 
-```
 rag-events-chatbot/
 
-├── app/                # API REST avec FastAPI
-├── data/               # données d’événements
-├── scripts/            # scripts de traitement (ingestion, nettoyage, indexation)
-├── notebooks/          # exploration et tests
-├── tests/              # tests unitaires
-
-├── env/                # environnement virtuel local principal 
-├── test_env/           # environnement de test pour vérifier la reproductibilité
-
-├── test_imports.py     # script de validation des dépendances
-├── requirements.txt    # liste des dépendances du projet
-├── README.md           # documentation
+├── app/
+├── data/
+│   ├── collect_events.py
+│   ├── vector_store.py
+│
+├── scripts/
+│   ├── build_vector_db.py
+│
+├── notebooks/
+├── tests/
+│   ├── test_collect_events.py
+│   ├── test_faiss.py
+│
+├── rag/
+│   ├── chatbot.py
+│   ├── prompt.py
+│   ├── evaluate.py
+│
+├── faiss_index/        
+├── main.py
+├── requirements.txt
+├── test_imports.py
+├── README.md
 ├── .gitignore
-```
-
-### Remarques importantes
-
-* Les dossiers `app`, `data`, `scripts`, `tests` et `notebooks` sont **présents mais encore vides** à ce stade.
-* Ils correspondent à la **structure cible du projet**, qui sera progressivement remplie dans les prochaines étapes (pipeline RAG, API, etc.).
-* Les dossiers `env/` et `test_env/` sont des environnements virtuels locaux utilisés uniquement pour le développement et les tests. Ils ne doivent pas être versionnés.
-* La reproductibilité de l’environnement a été validée en recréant un environnement vierge (`test_env`) et en exécutant :
-
-  ```
-  pip install -r requirements.txt
-  ```
-
-  sans erreur de dépendances.
 
 ---
 
-##  Installation complète (reproductible)
+## Installation complète (reproductible)
 
-1. Cloner le dépôt
+Cloner le dépôt :
+git clone https://github.com/sjbl69/RAG-EVENTS-CHATBOT.git
+cd RAG-EVENTS-CHATBOT
 
-git clone https://github.com/sjbl69/RAG-EVENTS-CHATBOT.git  
-cd RAG-EVENTS-CHATBOT  
+Créer un environnement virtuel :
+python -m venv env
 
----
+Activer l’environnement :
+Windows :
+env\Scripts\activate
 
-2. Vérifier la version de Python
+Mac / Linux :
+source env/bin/activate
 
-python --version  
-
-Version requise : Python 3.8 ou supérieur (recommandé : Python 3.12)
-
----
-
-3. Créer un environnement virtuel
-
-python -m venv env  
-
----
-
-4. Activer l’environnement
-
-Windows (PowerShell / CMD) :  
-env\Scripts\activate  
-
-Mac / Linux :  
-source env/bin/activate  
-
-Vous devez voir (env) apparaître dans le terminal
+Installer les dépendances :
+pip install --upgrade pip
+pip install -r requirements.txt
 
 ---
 
-5. Installer les dépendances
-
-pip install --upgrade pip  
-pip install -r requirements.txt  
-
----
-
-##  Configuration
+## Configuration
 
 Créer un fichier .env à la racine du projet :
 
-MISTRAL_API_KEY=your_api_key_here  
+MISTRAL_API_KEY=your_api_key_here
 
 Ne jamais versionner ce fichier.
 
 ---
 
-##  Vérification de l’environnement
+## Vérification de l’environnement
 
-Lancer le script :
-
-python test_imports.py  
-
-Ce script vérifie que toutes les dépendances essentielles sont correctement installées.
-
-Code de sortie :
-0 → succès  
-1 → échec  
+python test_imports.py
 
 Résultat attendu :
-
-FAISS OK  
-LangChain OK  
-Mistral OK  
-Sentence-Transformers OK  
-FastAPI OK  
-
----
-
-##  État actuel du projet
-
-Ce dépôt correspond à la mise en place de l’environnement de développement reproductible.
-
-Les fonctionnalités suivantes ne sont pas encore implémentées :
-- récupération des données OpenAgenda  
-- construction de l’index FAISS  
-- pipeline RAG complet  
-- API FastAPI  
+FAISS OK
+LangChain OK
+Mistral OK
+Sentence-Transformers OK
+FastAPI OK
 
 ---
 
-##  Tests
+## IMPORTANT — Index FAISS
 
-Les tests unitaires seront ajoutés dans le dossier :
+Le dossier faiss_index/ n’est pas versionné.
 
-tests/
-
-Ils permettront de valider :
-- la récupération des données  
-- la vectorisation  
-- la génération de réponses  
+Il doit être reconstruit avant d’utiliser le chatbot.
 
 ---
 
-##  Technologies utilisées
+## Workflow complet
 
-- Python 3.12  
-- LangChain  
-- LangChain Community  
-- FAISS (faiss-cpu)  
-- Mistral AI  
-- Sentence Transformers (HuggingFace)  
-- FastAPI  
-- Uvicorn  
+1. Collecte des événements :
+python data/collect_events.py
+
+2. Nettoyage des données :
+python data/clean_events.py
+
+3. Construction de l’index vectoriel (FAISS) :
+python scripts/build_vector_db.py
+
+→ crée le dossier faiss_index/
+
+4. Lancement du chatbot :
+python main.py
 
 ---
 
-##  Auteur
+## Fonctionnement
+
+1. L’utilisateur pose une question
+2. FAISS récupère les événements pertinents
+3. Les résultats sont injectés dans un prompt
+4. Mistral génère une réponse naturelle et contextualisée
+
+---
+
+## Exemple
+
+Question :
+Quels événements à Paris ?
+
+Réponse :
+Recommandations d’événements avec date et lieu
+
+---
+
+## Technologies utilisées
+
+Python 3.12
+LangChain
+FAISS (faiss-cpu)
+Mistral AI
+Sentence Transformers
+FastAPI
+Uvicorn
+
+---
+
+## Auteur
 
 Projet réalisé dans le cadre d’une formation en Data Science et Intelligence Artificielle.
