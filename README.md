@@ -38,7 +38,7 @@ rag-events-chatbot/
 │   ├── prompt.py
 │   ├── evaluate.py
 │
-├── faiss_index/        (généré, non versionné)
+├── faiss_index/        
 │
 ├── main.py
 ├── requirements.txt
