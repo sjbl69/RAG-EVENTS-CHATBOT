@@ -27,21 +27,18 @@ def ask_question(request: QuestionRequest):
     except Exception as e:
         print("\n ERREUR /ask ")
         traceback.print_exc()
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
 
 
-#  REBUILD ENDPOINT
+# REBUILD ENDPOINT
 
 @app.post("/rebuild")
 def rebuild_index():
     try:
-        result = rag_service.rebuild()
-        return {
-            "message": "Base vectorielle reconstruite",
-            "details": result
-        }
+        rag_service.rebuild()
+        return {"message": "Base vectorielle reconstruite"}
 
     except Exception as e:
         print("\n ERREUR /rebuild ")
         traceback.print_exc()
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))

@@ -1,11 +1,12 @@
-import requests
+from fastapi.testclient import TestClient
+from api.main import app
 
-BASE_URL = "http://127.0.0.1:8000"
+client = TestClient(app)
 
 
 def test_ask():
-    response = requests.post(
-        f"{BASE_URL}/ask",
+    response = client.post(
+        "/ask",
         json={"question": "Quels événements à Lyon ce week-end ?"}
     )
 
@@ -13,9 +14,13 @@ def test_ask():
     data = response.json()
 
     assert "answer" in data
+    assert isinstance(data["answer"], str)
 
 
 def test_rebuild():
-    response = requests.post(f"{BASE_URL}/rebuild")
+    response = client.post("/rebuild")
 
     assert response.status_code == 200
+    data = response.json()
+
+    assert "message" in data
