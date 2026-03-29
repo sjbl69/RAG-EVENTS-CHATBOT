@@ -150,7 +150,7 @@ python data/collect_events.py
 ### 2. Nettoyage des données
 
 ```bash
-python scripts/build_vector_db.py
+Les données sont nettoyées automatiquement lors de la construction de la base vectorielle. Aucune action manuelle n’est nécessaire.
 ```
 
 ---
