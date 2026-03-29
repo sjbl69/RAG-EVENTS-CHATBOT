@@ -150,7 +150,7 @@ python data/collect_events.py
 ### 2. Nettoyage des données
 
 ```bash
-python data/clean_events.py
+python scripts/build_vector_db.py
 ```
 
 ---
