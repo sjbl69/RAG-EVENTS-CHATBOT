@@ -1,23 +1,33 @@
 from fastapi.testclient import TestClient
 from api.main import app
+from unittest.mock import patch
 
 client = TestClient(app)
 
 
-def test_ask():
+# TEST /ask 
+
+@patch("api.rag_service.RAGService.ask")
+def test_ask(mock_ask):
+    mock_ask.return_value = "Réponse simulée"
+
     response = client.post(
         "/ask",
-        json={"question": "Quels événements à Lyon ce week-end ?"}
+        json={"question": "Quels événements ?"}
     )
 
     assert response.status_code == 200
     data = response.json()
 
-    assert "answer" in data
-    assert isinstance(data["answer"], str)
+    assert data["answer"] == "Réponse simulée"
 
 
-def test_rebuild():
+# TEST /rebuild 
+
+@patch("api.rag_service.RAGService.rebuild")
+def test_rebuild(mock_rebuild):
+    mock_rebuild.return_value = "OK"
+
     response = client.post("/rebuild")
 
     assert response.status_code == 200
