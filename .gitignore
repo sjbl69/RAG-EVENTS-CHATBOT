@@ -1,7 +1,22 @@
+# Environnements virtuels
 .venv/
 env/
 test_env/
+ragas_env/
+
+# Python
 __pycache__/
 *.pyc
+
+# Variables d'environnement
 .env
+
+# Index FAISS (reconstructible)
 faiss_index/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
